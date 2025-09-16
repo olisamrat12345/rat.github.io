@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            color: #fff;
+            padding: 20px;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .page {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            display: none;
+            animation: fadeIn 1s ease;
+            position: relative;
+            overflow: hidden;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #FFD700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        input {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            width: 80%;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        input:focus {
+            outline: none;
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 10px;
+            background: linear-gradient(45deg, #FF3366, #FF9933);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .btn:active {
+            transform: scale(0.95);
+        }
+        
+        .dodge {
+            position: relative;
+            transition: all 0.5s ease;
+        }
+        
+        .cake {
+            width: 200px;
+            height: 140px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        
+        .cake-base {
+            width: 200px;
+            height: 70px;
+            background: linear-gradient(45deg, #F8BBD0, #F48FB1);
+            border-radius: 10px;
+            position: absolute;
+            bottom: 0;
+        }
+        
+        .cake-middle {
+            width: 160px;
+            height: 50px;
+            background: linear-gradient(45deg, #C8E6C9, #A5D6A7);
+            border-radius: 10px;
+            position: absolute;
+            bottom: 70px;
+            left: 20px;
+        }
+        
+        .cake-top {
+            width: 120px;
+            height: 40px;
+            background: linear-gradient(45deg, #FFECB3, #FFD54F);
+            border-radius: 10px;
+            position: absolute;
+            bottom: 120px;
+            left: 40px;
+        }
+        
+        .candle {
+            width: 10px;
+            height: 40px;
+            background: linear-gradient(to right, #4CAF50, #8BC34A, #CDDC39);
+            position: absolute;
+            bottom: 160px;
+            left: 95px;
+            border-radius: 5px;
+        }
+        
+        .flame {
+            width: 15px;
+            height: 30px;
+            background: linear-gradient(to top, #FF9800, #FFEB3B, #FFF9C4);
+            border-radius: 50% 50% 20% 20%;
+            position: absolute;
+            bottom: 200px;
+            left: 92.5px;
+            animation: flicker 1s infinite alternate;
+            box-shadow: 0 0 20px #FF5722, 0 0 40px #FF9800;
+        }
+        
+        @keyframes flicker {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(0.8); opacity: 0.8; }
+        }
+        
+        .gift-box {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, #E91E63, #F44336);
+            margin: 30px auto;
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 1s;
+        }
+        
+        .gift-box:before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            top: 65px;
+            left: 0;
+        }
+        
+        .gift-box:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            top: 0;
+            left: 65px;
+        }
+        
+        .lid {
+            width: 170px;
+            height: 40px;
+            background: linear-gradient(45deg, #F44336, #E91E63);
+            position: absolute;
+            top: -40px;
+            left: -10px;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .ribbon {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #FFD700;
+            border-radius: 50%;
+            top: -20px;
+            left: 60px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        }
+        
+        .wishes {
+            font-size: 1.5rem;
+            margin: 30px 0;
+            line-height: 1.8;
+            color: #FFD700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .note-btn {
+            background: linear-gradient(45deg, #2196F3, #21CBF3);
+            margin-top: 20px;
+        }
+        
+        .note {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            font-style: italic;
+            max-height: 150px;
+            overflow-y: auto;
+            word-wrap: break-word;
+        }
+        
+        /* Decorative elements */
+        .decoration {
+            position: absolute;
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            color: #FFD700;
+            font-size: 2rem;
+            animation: twinkle 3s infinite;
+            opacity: 0.7;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .balloon {
+            position: absolute;
+            width: 40px;
+            height: 50px;
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-100px) rotate(10deg); }
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 20px;
+            opacity: 0.7;
+            animation: fall 5s infinite;
+        }
+        
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-height: 700px) {
+            .page {
+                padding: 20px;
+                max-height: 85vh;
+            }
+            
+            .wishes {
+                font-size: 1.2rem;
+                margin: 20px 0;
+            }
+            
+            .note {
+                max-height: 100px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .page {
+                padding: 20px 15px;
+                border-radius: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            p {
+                font-size: 1rem;
+            }
+            
+            .wishes {
+                font-size: 1.2rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 1rem;
+                margin: 8px;
+            }
+            
+            input {
+                width: 90%;
+                padding: 10px 15px;
+            }
+            
+            .cake {
+                transform: scale(0.8);
+                margin: -10px auto 10px;
+            }
+            
+            .gift-box {
+                transform: scale(0.8);
+                margin: 10px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Page 1: Name Input -->
+        <div class="page" id="page1">
+            <h1>Happy Birthday! 🎉</h1>
+            <p>Enter your name to begin the celebration!</p>
+            <input type="text" id="nameInput" placeholder="Your Name">
+            <button class="btn" onclick="nextPage('page1', 'page2')">Let's Celebrate!</button>
+            
+            <!-- Decorations -->
+            <div class="decoration star" style="top: 20px; left: 50px;"><i class="fas fa-star"></i></div>
+            <div class="decoration star" style="top: 80px; right: 70px;"><i class="fas fa-star"></i></div>
+            <div class="decoration star" style="bottom: 40px; left: 80px;"><i class="fas fa-star"></i></div>
+            <div class="decoration star" style="bottom: 100px; right: 40px;"><i class="fas fa-star"></i></div>
+            
+            <div class="decoration balloon" style="top: 50px; left: 100px; background: rgba(255, 0, 0, 0.7);"></div>
+            <div class="decoration balloon" style="top: 120px; right: 120px; background: rgba(0, 255, 0, 0.7);"></div>
+            <div class="decoration balloon" style="bottom: 80px; left: 150px; background: rgba(0, 0, 255, 0.7);"></div>
+        </div>
+        
+        <!-- Page 2: Handsome Question -->
+        <div class="page" id="page2">
+            <h1>Ain't Samrat Handsome? 😎</h1>
+            <p>We all know the answer to this one!</p>
+            <button class="btn" onclick="nextPage('page2', 'page3')">Yes, Absolutely! 🥰</button>
+            <button class="btn dodge" id="noBtn" onmouseover="dodge(this)">No Way! 🙄</button>
+            
+            <!-- Decorations -->
+            <div class="decoration star" style="top: 30px; left: 70px;"><i class="fas fa-star"></i></div>
+            <div class="decoration star" style="top: 100px; right: 90px;"><i class="fas fa-star"></i></div>
+        </div>
+        
+        <!-- Page 3: Ready for Surprise -->
+        <div class="page" id="page3">
+            <h1>Are You Ready for the Surprise?</h1>
+            <p>Get ready for something amazing!</p>
+            <button class="btn" onclick="nextPage('page3', 'page4')">Yes! 🎁</button>
+            <button class="btn" onclick="nextPage('page3', 'page4')">Absolutely Yes! 🎉</button>
+            
+            <!-- Decorations -->
+            <div class="decoration confetti" style="top: 20px; left: 50px; background: #FF3366;"></div>
+            <div class="decoration confetti" style="top: 40px; left: 150px; background: #33FF66;"></div>
+            <div class="decoration confetti" style="top: 60px; right: 100px; background: #3366FF;"></div>
+        </div>
+        
+        <!-- Page 4: Cake -->
+        <div class="page" id="page4">
+            <h1>Make a Wish! 🎂</h1>
+            <div class="cake">
+                <div class="cake-base"></div>
+                <div class="cake-middle"></div>
+                <div class="cake-top"></div>
+                <div class="candle"></div>
+                <div class="flame" id="candleFlame"></div>
+            </div>
+            <button class="btn" onclick="blowCandle()">Blow the Candle! 🕯️</button>
+            
+            <!-- Decorations -->
+            <div class="decoration star" style="top: 40px; left: 60px;"><i class="fas fa-star"></i></div>
+            <div class="decoration star" style="top: 100px; right: 80px;"><i class="fas fa-star"></i></div>
+        </div>
+        
+        <!-- Page 5: Gift -->
+        <div class="page" id="page5">
+            <h1>Your Gift Awaits! 🎁</h1>
+            <div class="gift-box" id="giftBox" onclick="openGift()">
+                <div class="lid"></div>
+                <div class="ribbon"></div>
+            </div>
+            <p>Click on the gift to open it!</p>
+            
+            <!-- Decorations -->
+            <div class="decoration confetti" style="top: 30px; left: 70px; background: #FF3366;"></div>
+            <div class="decoration confetti" style="top: 50px; right: 90px; background: #33FF66;"></div>
+        </div>
+        
+        <!-- Page 6: Wishes -->
+        <div class="page" id="page6">
+            <h1>Happy Birthday! 🥳</h1>
+            <div class="wishes" id="wishesText">
+                <!-- Wishes will be inserted here -->
+            </div>
+            <button class="btn note-btn" onclick="showNote()">Note</button>
+            <div class="note" id="note">
+                It's the least I could do, so forgive me if it wasn't good. I hope you have an amazing birthday filled with joy, laughter, and all the things you love the most! May this year bring you success, happiness, and countless blessings. Enjoy your special day to the fullest!
+            </div>
+            
+            <!-- Decorations -->
+            <div class="decoration star" style="top: 50px; left: 80px;"><i class="fas fa-star"></i></div>
+            <div class="decoration star" style="bottom: 40px; right: 70px;"><i class="fas fa-star"></i></div>
+            <div class="decoration balloon" style="top: 100px; right: 120px; background: rgba(255, 105, 180, 0.7);"></div>
+        </div>
+    </div>
+
+    <script>
+        // Show the first page on load
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('page1').style.display = 'block';
+            createDecorations();
+        });
+        
+        // Create random decorations
+        function createDecorations() {
+            const body = document.querySelector('body');
+            const colors = ['#FF3366', '#33FF66', '#3366FF', '#FF33CC', '#FF9933', '#33FFFC'];
+            
+            // Create stars
+            for (let i = 0; i < 15; i++) {
+                const star = document.createElement('div');
+                star.className = 'decoration star';
+                star.innerHTML = '<i class="fas fa-star"></i>';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.fontSize = (Math.random() * 20 + 10) + 'px';
+                star.style.animationDelay = Math.random() * 5 + 's';
+                body.appendChild(star);
+            }
+            
+            // Create confetti
+            for (let i = 0; i < 20; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'decoration confetti';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.top = Math.random() * 100 + 'vh';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animationDelay = Math.random() * 5 + 's';
+                body.appendChild(confetti);
+            }
+        }
+        
+        // Navigate between pages
+        function nextPage(currentPage, nextPage) {
+            // Reset elements that might have been modified
+            if (currentPage === 'page2') {
+                resetDodgeButton();
+            }
+            
+            document.getElementById(currentPage).style.display = 'none';
+            document.getElementById(nextPage).style.display = 'block';
+            
+            // Scroll to top of the new page
+            document.getElementById(nextPage).scrollTop = 0;
+            
+            // Reset candle flame if going to page4
+            if (nextPage === 'page4') {
+                resetCandle();
+            }
+            
+            // Reset gift box if going to page5
+            if (nextPage === 'page5') {
+                resetGift();
+            }
+            
+            // If moving to the wishes page, update the name
+            if (nextPage === 'page6') {
+                const name = document.getElementById('nameInput').value || 'Friend';
+                document.getElementById('wishesText').innerHTML = `
+                    Happy Birthday ${name}! 🎉<br>
+                    May your day be filled with joy, laughter, and lots of cake! 🎂<br>
+                    Wishing you all the best in the year ahead! 🌟<br>
+                    Enjoy your special day! 🥳
+                `;
+            }
+        }
+        
+        // Reset dodge button position
+        function resetDodgeButton() {
+            const noBtn = document.getElementById('noBtn');
+            if (noBtn) noBtn.style.transform = 'translate(0, 0)';
+        }
+        
+        // Reset candle flame
+        function resetCandle() {
+            const flame = document.getElementById('candleFlame');
+            if (flame) {
+                flame.style.animation = 'flicker 1s infinite alternate';
+                flame.style.transform = 'scale(1)';
+                flame.style.opacity = '1';
+            }
+        }
+        
+        // Reset gift box
+        function resetGift() {
+            const giftBox = document.getElementById('giftBox');
+            if (giftBox) giftBox.style.transform = 'rotateY(0deg)';
+        }
+        
+        // Dodge the No button
+        function dodge(button) {
+            const x = Math.random() * 200 - 100;
+            const y = Math.random() * 200 - 100;
+            button.style.transform = `translate(${x}px, ${y}px)`;
+        }
+        
+        // Blow the candle
+        function blowCandle() {
+            const flame = document.getElementById('candleFlame');
+            if (flame) {
+                flame.style.animation = 'none';
+                flame.style.transform = 'scale(0)';
+                flame.style.opacity = '0';
+            }
+            setTimeout(() => {
+                nextPage('page4', 'page5');
+            }, 1000);
+        }
+        
+        // Open the gift
+        function openGift() {
+            const giftBox = document.getElementById('giftBox');
+            if (giftBox) giftBox.style.transform = 'rotateY(180deg)';
+            setTimeout(() => {
+                nextPage('page5', 'page6');
+            }, 1000);
+        }
+        
+        // Show note
+        function showNote() {
+            const note = document.getElementById('note');
+            note.style.display = note.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
+</body>
+</html>
